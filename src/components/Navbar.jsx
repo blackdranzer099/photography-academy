@@ -1,18 +1,25 @@
-
 import styles from './Navbar.module.css';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-const Navbar = () => {
-    return (
-        <nav className={styles.nav}>
-            <div className={styles.logo}>Photography Academy</div>
-            <ul className={styles.navLinks}>
-                <li><a href="/">Home</a></li>
-                <li><a href="/courses">Courses</a></li>
-                <li><a href="/gallery">Gallery</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </nav>
-    );
-};
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-export default Navbar;
+  return (
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>📷 PhotoAcademy</div>
+      <div className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link to="/gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
+        <Link to="/services" onClick={() => setMenuOpen(false)}>Services</Link>
+        <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
+        <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+      </div>
+      <div className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
+        <div />
+        <div />
+        <div />
+      </div>
+    </nav>
+  );
+}
