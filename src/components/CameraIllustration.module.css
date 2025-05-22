@@ -1,0 +1,11 @@
+.camera {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.camera:hover .lens-glow {
+  opacity: 0.4;
+  transform: scale(1.2);
+}

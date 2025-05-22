@@ -1,0 +1,66 @@
+.floatingBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.floatingBtn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6c63ff;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 160px;
+  text-align: center;
+}
+
+.ctaLink:hover {
+  background-color: #5a52d6;
+  transform: scale(1.05);
+}
+
+.ctaLink:active {
+  transform: scale(0.95);
+}
+
+/* Optional: Add subtle pulse animation */
+.pulse::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.6);
+  animation: pulse 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}

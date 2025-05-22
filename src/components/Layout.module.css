@@ -1,0 +1,15 @@
+/* Layout.module.css */
+
+.layout-main {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-color: #f9fafb; /* light background */
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .layout-main {
+    padding: 3rem 2rem;
+  }
+}

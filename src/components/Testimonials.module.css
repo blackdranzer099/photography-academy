@@ -1,0 +1,102 @@
+.testimonialsSection {
+  padding: 5rem 0;
+  background-color: #f9fafb; /* light gray */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #111;
+}
+
+.sliderWrapper {
+  position: relative;
+}
+
+.card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.quote {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #4b5563; /* gray-600 */
+  margin-bottom: 1.5rem;
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+
+.role {
+  font-size: 0.95rem;
+  color: #6b7280; /* gray-500 */
+}
+
+/* Custom Arrows */
+.slickArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #6c63ff;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.slickArrow:hover {
+  background-color: #5a52d6;
+}
+
+.slickArrow svg {
+  stroke: white;
+  stroke-width: 2;
+}
+
+.slickPrev {
+  left: -60px;
+}
+
+.slickNext {
+  right: -60px;
+}
+
+/* Dots */
+.slickDots {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.slickDots li button::before {
+  color: #6c63ff !important;
+  font-size: 12px;
+}

@@ -1,26 +1,120 @@
-// App.jsx
+// src/App.jsx
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout'; // 👈 wrap Navbar inside Layout
-import Home from './pages/Home';
-import Gallery from './pages/Gallery';
-import Services from './pages/Services';
-import About from './pages/About';
-import Contact from './pages/Contact';
 
-function App() {
+// Layout Component
+import Layout from './components/Layout';
+
+// ScrollToTop Component
+import ScrollToTop from './components/ScrollToTop'; // Add this import
+
+// Lazy-loaded Page Components
+const Home = React.lazy(() => import('./pages/Home'));
+const Gallery = React.lazy(() => import('./pages/Gallery'));
+const Services = React.lazy(() => import('./pages/Services'));
+const About = React.lazy(() => import('./pages/About'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+
+// Loading fallback component
+function LoadingFallback() {
   return (
-    <Router>
-      <Routes>
-        <Route element={<Layout />}> {/* 👈 layout holds Navbar + Outlet */}
-          <Route path="/" element={<Home />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Route>
-      </Routes>
-    </Router>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      color: '#6c63ff',
+      fontSize: '1.5rem'
+    }}>
+      Loading...
+    </div>
   );
 }
 
-export default App;
+// Error boundary for lazy loading
+const ErrorBoundary = ({ children }) => {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (hasError) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <h2>Something went wrong.</h2>
+        <p>Please try refreshing the page.</p>
+      </div>
+    );
+  }
+
+  return (
+    <React.Fragment>
+      {children}
+    </React.Fragment>
+  );
+};
+
+export default function App() {
+  return (
+    <Router>
+      {/* Main wrapper */}
+      <div style={{ paddingTop: '80px' }}>
+        {/* Routes */}
+        <Routes>
+          <Route element={<Layout />}>
+            <Route
+              index
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <Home />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="gallery"
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <Gallery />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="services"
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <Services />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="about"
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <About />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="contact"
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <Contact />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+          </Route>
+        </Routes>
+
+        {/* Scroll to top helper */}
+        <ScrollToTop /> {/* Ensure this is imported */}
+      </div>
+    </Router>
+  );
+}
