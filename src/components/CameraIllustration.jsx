@@ -26,14 +26,15 @@ export default function CameraIllustration() {
       <path d="M190 80L210 40H170L180 60L150 100L190 80Z" fill="#FFD700" />
 
       {/* Buttons */}
-      <circle cx="120" cy="180" r="8" fill="#aaa" />
+      {/* <circle cx="130" cy="180" r="8" fill="#aaa" /> */}
+      <circle cx="130" cy="180" r="8" fill="#aaa" />
       <circle cx="180" cy="180" r="5" fill="#ccc" />
 
       {/* Lens Glow Effect */}
       <motion.circle
         className="lens-glow"
         cx="150"
-        cy="130"
+        cy="150"
         r="40"
         fill="#6c63ff"
         opacity={0.1}

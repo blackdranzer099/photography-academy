@@ -1,10 +1,15 @@
-// Features.jsx
+// src/components/Features.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Features.module.css';
 
-// Example using React Icons (you can replace with Heroicons or any icon set)
-import { FaChalkboardTeacher, FaLaptopCode, FaCameraRetro, FaPhotoVideo } from 'react-icons/fi';
+// Use Font Awesome icons
+import {
+  FaChalkboardTeacher,
+  FaLaptopCode,
+  FaCameraRetro,
+  FaRegImages
+} from 'react-icons/fa';
 
 const features = [
   {
@@ -25,7 +30,7 @@ const features = [
   {
     title: "Post-Processing",
     desc: "Master Lightroom & Photoshop like a pro.",
-    icon: <FaPhotoVideo />,
+    icon: <FaRegImages />,
   },
 ];
 

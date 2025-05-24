@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 
 // ScrollToTop Component
-import ScrollToTop from './components/ScrollToTop'; // Add this import
+import ScrollToTop from './components/ScrollToTop';
 
 // Lazy-loaded Page Components
 const Home = React.lazy(() => import('./pages/Home'));
@@ -14,6 +14,7 @@ const Gallery = React.lazy(() => import('./pages/Gallery'));
 const Services = React.lazy(() => import('./pages/Services'));
 const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
+const FreeCoursePage = React.lazy(() => import('./pages/FreeCoursePage'));
 
 // Loading fallback component
 function LoadingFallback() {
@@ -56,6 +57,10 @@ export default function App() {
     <Router>
       {/* Main wrapper */}
       <div style={{ paddingTop: '80px' }}>
+
+        {/* Scroll to top helper */}
+        <ScrollToTop />
+
         {/* Routes */}
         <Routes>
           <Route element={<Layout />}>
@@ -109,11 +114,20 @@ export default function App() {
                 </ErrorBoundary>
               }
             />
+            
+            {/* New route for Free Course Page */}
+            <Route
+              path="free-course"
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<LoadingFallback />}>
+                    <FreeCoursePage />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
           </Route>
         </Routes>
-
-        {/* Scroll to top helper */}
-        <ScrollToTop /> {/* Ensure this is imported */}
       </div>
     </Router>
   );

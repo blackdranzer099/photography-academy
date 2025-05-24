@@ -1,4 +1,4 @@
-// components/Testimonials.jsx
+// src/components/Testimonials.jsx
 import React from 'react';
 import Slider from 'react-slick';
 import styles from './Testimonials.module.css';
@@ -79,7 +79,7 @@ function PrevArrow({ className, onClick }) {
       aria-label="Previous testimonial"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M15 18l-6-6 6-6" />
+        <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </button>
   );
@@ -94,7 +94,7 @@ function NextArrow({ className, onClick }) {
       aria-label="Next testimonial"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M9 18l6-6-6-6" />
+        <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </button>
   );
