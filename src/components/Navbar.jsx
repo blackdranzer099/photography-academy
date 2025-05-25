@@ -1,7 +1,10 @@
 // src/components/Navbar.jsx
-import styles from './Navbar.module.css';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+
+import styles from './Navbar.module.css';
+import RegisterForm from './RegisterForm'; // Make sure this exists
+import logoImage from '../assets/sateesh.jpg'; // Correct path to image
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -13,22 +16,24 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false); // Modal state for Book Demo
   const location = useLocation();
 
-  // Close menu on outside click
-  const handleClickOutside = useCallback(() => {
+  // Close mobile menu on outside click
+  const handleClickOutside = () => {
     const navbar = document.querySelector(`.${styles.navbar}`);
     if (!navbar?.contains(document.activeElement) && menuOpen) {
       setMenuOpen(false);
     }
-  }, [menuOpen, styles.navbar]);
+  };
 
+  // Add event listener for outside click
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [handleClickOutside]);
+  }, [menuOpen]);
 
   // Toggle body class for styling when menu is open
   useEffect(() => {
@@ -40,59 +45,85 @@ export default function Navbar() {
       document.body.style.overflow = '';
     }
 
-    // Reset overflow on unmount
     return () => {
       document.body.style.overflow = '';
     };
   }, [menuOpen]);
 
-  // Close menu on route change
+  // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.logo}>📷 PhotoAcademy</div>
+    <>
+      {/* Navbar */}
+      <nav className={styles.navbar}>
+        {/* Logo with Image */}
+        <Link to="/" className={styles.logo}>
+          <img
+            src={logoImage}
+            alt="Sateesh Velduti Academy"
+            className={styles.logoImage}
+          />
+        </Link>
 
-      <div className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
-        {navLinks.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            onClick={() => setMenuOpen(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') setMenuOpen(false);
-            }}
-            tabIndex="0"
-            role="link"
-            aria-current={window.location.pathname === link.path ? 'page' : undefined}
-            className={window.location.pathname === link.path ? styles.active : ''}
-          >
-            {link.name}
-          </Link>
-        ))}
-      </div>
+        {/* Desktop Navigation Links */}
+        <ul className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
+          {navLinks.map((link) => (
+            <li key={link.path}>
+              <Link
+                to={link.path}
+                onClick={() => setMenuOpen(false)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') setMenuOpen(false);
+                }}
+                tabIndex="0"
+                role="link"
+                aria-current={location.pathname === link.path ? 'page' : undefined}
+                className={location.pathname === link.path ? styles.active : ''}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
 
-      <div
-        className={styles.hamburger}
-        onClick={() => setMenuOpen(!menuOpen)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            setMenuOpen(!menuOpen);
-          }
-        }}
-        role="button"
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        tabIndex="0"
-      >
-        <span className={styles.visuallyHidden}>
-          {menuOpen ? "Close menu" : "Open menu"}
-        </span>
-        <div className={`${styles.bar} ${menuOpen ? styles.animateBar1 : ''}`} />
-        <div className={`${styles.bar} ${menuOpen ? styles.animateBar2 : ''}`} />
-        <div className={`${styles.bar} ${menuOpen ? styles.animateBar3 : ''}`} />
-      </div>
-    </nav>
+          {/* Book Demo Button - Desktop Only */}
+          <li className={styles.ctaContainer}>
+            <button
+              className={styles.ctaButton}
+              onClick={() => setModalOpen(true)}
+              aria-label="Book a demo session"
+            >
+              Book Demo
+            </button>
+          </li>
+        </ul>
+
+        {/* Hamburger Menu Icon (for mobile) */}
+        <div
+          className={styles.hamburger}
+          onClick={() => setMenuOpen(!menuOpen)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              setMenuOpen(!menuOpen);
+            }
+          }}
+          role="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          tabIndex="0"
+        >
+          <span className={styles.visuallyHidden}>
+            {menuOpen ? "Close menu" : "Open menu"}
+          </span>
+          <div className={`${styles.bar} ${menuOpen ? styles.animateBar1 : ''}`} />
+          <div className={`${styles.bar} ${menuOpen ? styles.animateBar2 : ''}`} />
+          <div className={`${styles.bar} ${menuOpen ? styles.animateBar3 : ''}`} />
+        </div>
+      </nav>
+
+      {/* Modal Form */}
+      {modalOpen && <RegisterForm onClose={() => setModalOpen(false)} />}
+    </>
   );
 }

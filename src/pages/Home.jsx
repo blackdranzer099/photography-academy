@@ -1,7 +1,7 @@
 // src/pages/Home.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom'; // ✅ Add Link for routing
+import { Link } from 'react-router-dom';
 
 // Components
 import styles from './Home.module.css';
@@ -69,6 +69,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className={`${styles.btn} ${styles.btnPrimary}`}
               aria-label="Start Free Course"
+              onClick={(e) => e.stopPropagation()}
             >
               <Link to="/free-course" className={styles.linkStyle}>
                 Start Free Course
@@ -79,6 +80,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
               className={`${styles.btn} ${styles.btnSecondary}`}
               aria-label="See Our Courses"
+              onClick={(e) => e.stopPropagation()}
             >
               <Link to="/courses" className={styles.linkStyle}>
                 See Our Courses
@@ -100,7 +102,7 @@ export default function Home() {
 
       {/* Scroll-Reveal Sections Below Hero */}
       <Features />
-      <GallerySection />
+      
       <Testimonials />
 
       {/* Floating CTA Button */}

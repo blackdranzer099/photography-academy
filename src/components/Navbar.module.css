@@ -1,4 +1,4 @@
-/* Navbar.module.css */
+/* src/components/Navbar.module.css */
 
 .navbar {
   position: fixed;
@@ -9,24 +9,39 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .logo {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: #111;
   white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.logoImage {
+  height: 35px; /* Smaller size */
+  width: auto;
+  border-radius: 50%; /* Circular logo */
+  object-fit: cover;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.logo:hover .logoImage {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.2));
 }
 
 .links {
@@ -37,6 +52,9 @@
   flex-grow: 1;
   max-width: 70%;
   min-width: max-content;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .links a {
@@ -97,6 +115,33 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
+.ctaContainer {
+  display: flex;
+  align-items: center;
+}
+
+.ctaButton {
+  background: linear-gradient(90deg, #6c63ff, #a88beb);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease-in-out, background 0.3s ease;
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.3);
+  font-size: 1rem;
+}
+
+.ctaButton:hover {
+  background: linear-gradient(90deg, #5a52d6, #9b7edf);
+  transform: scale(1.05);
+}
+
+.ctaButton:active {
+  transform: scale(0.98);
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .links {
@@ -150,5 +195,9 @@
 
   .hamburger {
     display: flex;
+  }
+
+  .ctaContainer {
+    display: none !important;
   }
 }
