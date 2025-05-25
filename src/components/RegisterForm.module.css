@@ -28,6 +28,15 @@
   padding-bottom: 4rem;
 }
 
+.modalContent::-webkit-scrollbar {
+  display: none;
+}
+
+.modalContent {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .title {
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -95,6 +104,7 @@
   transition: transform 0.2s ease, background-color 0.3s ease;
   cursor: pointer;
   padding: 0.6rem 1.2rem;
+  font-size: 1rem;
 }
 
 .backButton:hover,
@@ -111,8 +121,9 @@
 .loginLink {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #111;
+  color: #ccc;
   text-align: center;
+  display: block;
 }
 
 .link {
@@ -129,4 +140,40 @@
   color: red;
   font-size: 0.875rem;
   margin-top: 0.25rem;
+}
+
+/* Mobile Specific Styling */
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 1.5rem;
+    max-width: 95%;
+    width: 95%;
+  }
+
+  .input,
+  .select {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
+  .buttons {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .backButton,
+  .nextButton {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .radioGroup {
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .radioLabel {
+    font-size: 1rem;
+  }
 }
