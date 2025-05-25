@@ -113,7 +113,7 @@ export default function RegisterForm({ onClose }) {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                placeholder="Enter your phone number"
+                placeholder="Enter phone number"
                 className={styles.input}
                 onChange={handleInputChange}
                 value={formData.phoneNumber}
